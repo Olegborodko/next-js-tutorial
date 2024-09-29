@@ -1,0 +1,37 @@
+Есть https://fonts.google.com/,
+Оттуда можно загрузить любой фон таки способом - 
+
+import { Inter } from 'next/font/google';
+ 
+export const inter = Inter({ subsets: ['latin'] });
+
+шрифты, импортированные через next/font/google в Next.js, автоматически будут загружаться оптимизированным способом. Это означает:
+
+Оптимизация загрузки: Next.js загружает шрифты так, чтобы они кэшировались в браузере пользователя. Это позволяет избежать повторной загрузки на последующих запросах, если кэш не очищен.
+
+Поддержка подмножества: Загрузка происходит только для указанного подмножества символов (в данном случае 'latin'), что уменьшает общий размер шрифтов и ускоряет время загрузки.
+
+Инлайн стили: Next.js автоматически вставляет стили для шрифтов в заголовок документа, что также ускоряет рендеринг.
+
+Таким образом, шрифты не будут загружаться повторно при каждом запросе, если они уже кэшированы у пользователя.
+
+// ====================
+на странице шрифта, например https://fonts.google.com/specimen/Lusitana?query=Lusitana
+
+можно увидеть какой weight он поддерживает,
+и есть ли subsets (подмножество)
+
+// ====================
+что-бы установить weight нужно либо Tailwind CSS использовать
+<p className={`${lusitana.className} font-normal`}>
+  Текст с весом 400
+</p>
+
+либо style
+<p className={`${lusitana.className}`} style={{ fontWeight: 400 }}>
+  Текст с весом 400
+</p>
+
+https://nextjs.org/docs/app/building-your-application/optimizing/fonts#using-multiple-fonts
+
+https://nextjs.org/docs/app/api-reference/components/font#font-function-arguments
