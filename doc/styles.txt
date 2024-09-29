@@ -1,0 +1,4 @@
+стили в next.js можно писать тремя способами
+- модули
+- global.css
+- tailwind css
