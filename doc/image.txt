@@ -1,0 +1,9 @@
+The <Image> Component is an extension of the HTML <img> tag, and comes with automatic image optimization, such as:
+
+Preventing layout shift automatically when images are loading.
+Resizing images to avoid shipping large images to devices with a smaller viewport.
+Lazy loading images by default (images load as they enter the viewport).
+Serving images in modern formats, like WebP and AVIF, when the browser supports it.
+
+docs
+https://nextjs.org/learn/dashboard-app/optimizing-fonts-images
