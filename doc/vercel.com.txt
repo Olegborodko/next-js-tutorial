@@ -1,0 +1,36 @@
+Разворачиваем проект на vercel.com
+- сперва заливаем проект на github
+- дальше заходим на vercel.com/signup
+- импортируем файлы нашего проекта, делаем деплой
+
+Next, to set up a database, click Continue to Dashboard and select the Storage tab from your project dashboard. Select Connect Store → Create New → Postgres → Continue.
+
+next-js-tutorial-postgres
+
+
+https://nextjs.org/learn/dashboard-app/setting-up-your-database
+
+// ================
+в файле .env нужно добавить все данные проекта
+POSTGRES_URL=""
+POSTGRES_PRISMA_URL=""
+POSTGRES_URL_NO_SSL=""
+POSTGRES_URL_NON_POOLING=""
+POSTGRES_USER=""
+POSTGRES_HOST=""
+POSTGRES_PASSWORD=""
+POSTGRES_DATABASE=""
+
+их можно найти после создания базы данных в vercel.com, конкретно в этом примере это POSTGRES
+
+Дальше можно создать таблицы и заполнить их данными, в этом проеекте это делаетй файл app/seed/route.ts. Файл запускается один раз и затем его нужно удалить или закомментировать
+
+// =================
+в vercel.com есть возможность просмотреть базу и деать запросы sql
+SELECT invoices.amount, customers.name
+FROM invoices
+JOIN customers ON invoices.customer_id = customers.id
+WHERE invoices.amount = 666;
+
+// ================
+все изменения в github будут автоматически отправляться в vercel.com
