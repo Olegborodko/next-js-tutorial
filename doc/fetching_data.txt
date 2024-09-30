@@ -1,0 +1,5 @@
+можно создать свой api
+https://nextjs.org/docs/app/building-your-application/routing/route-handlers
+
+c клиента не стоит отправлять запросы напрямую в базу данных,
+это нужно делать с серверной части
