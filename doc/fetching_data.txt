@@ -3,3 +3,15 @@ https://nextjs.org/docs/app/building-your-application/routing/route-handlers
 
 c клиента не стоит отправлять запросы напрямую в базу данных,
 это нужно делать с серверной части
+
+// ================================
+request waterfalls - это запросы которые идут друг за другом
+
+пример - 
+  const revenue = await fetchRevenue();
+  const latestInvoices = await fetchLatestInvoices();
+  const {totalPaidInvoices, totalPendingInvoices, numberOfInvoices, numberOfCustomers} = await fetchCardData();
+
+пока не закончится первый не начнется второй
+
+.. можно использовать Promise.all или Promise.allSettled что-бы это исправить
