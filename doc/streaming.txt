@@ -1,0 +1,73 @@
+loading.tsx is a special Next.js file built on top of Suspense, it allows you to create fallback UI to show as a replacement while page content loads.
+
+loading.tsx
+export default function Loading() {
+  return <div>Loading...</div>;
+}
+
+// =================================
+если закинуть файл loading.tsx в папку, то все подпапки будут использовать его при загрузке
+
+если закинуть его в папку (overview) вместе с page, тогда loading.tsx будет работать только для этой папки, но не для подпапок
+
+как я понял имя - overview тут не обязательное, и может быть другое
+
+// =================================
+таким образом можно разбить логику для одного и того-же маршрута 
+
+/pages
+  /dashboard
+    /(admin)
+      page.tsx
+    /(user)
+      page.tsx
+
+/dashboard/(admin)/page.tsx
+export default function AdminDashboard() {
+  return <h1>Админская панель</h1>;
+}
+
+/dashboard/(user)/page.tsx
+export default function UserDashboard() {
+  return <h1>Панель пользователя</h1>;
+}
+
+где-то на уровень выше - 
+import { useEffect, useState } from 'react';
+
+export default function Dashboard() {
+  const [role, setRole] = useState('user'); // динамически определяем роль
+
+  useEffect(() => {
+    // Здесь можно добавить логику для получения роли пользователя из API или контекста
+    const userRole = getUserRole(); // например, функция для получения роли
+    setRole(userRole);
+  }, []);
+
+  if (role === 'admin') {
+    return <AdminDashboard />;
+  } else {
+    return <UserDashboard />;
+  }
+}
+
+// ================================
+Можно подгружать компоненты на странице по мере их загрузки с сервера
+при динамическом рендеринге
+
+import { Suspense } from 'react';
+import RevenueChart from '@/app/ui/dashboard/revenue-chart';
+import { RevenueChartSkeleton } from '@/app/ui/skeletons';
+
+export default function Page() {
+  return (
+    <main>
+      <div className="grid grid-cols-1 gap-6">
+        <Suspense fallback={<RevenueChartSkeleton />}>
+          <RevenueChart />
+        </Suspense>
+      </div>
+    </main>
+  );
+}
+
